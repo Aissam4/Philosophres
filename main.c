@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 11:25:06 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/11 12:20:36 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/12 03:29:12 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ static void	error_handling(int ac)
 
 int	main(int ac, char **av)
 {
+	t_philo	philo;
+
+	(void)av;
+	(void)philo;
 	error_handling(--ac);
 	return (0);
 }
