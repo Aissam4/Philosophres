@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 11:25:06 by abarchil          #+#    #+#             */
-/*   Updated: 2022/02/13 08:41:26 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/02/13 09:37:25 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,10 @@ int	main(int ac, char **av)
 	if (error_handling(--ac) || args_init(ac, av, &args))
 		return (1);
 	philo = philo_init(&args);
+	if (!philo)
+		return (1);
+	else if (creat_philo(philo) == -1)
+		return (1);
+	free(philo);
 	return (0);
 }

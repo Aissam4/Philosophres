@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 11:31:33 by abarchil          #+#    #+#             */
-/*   Updated: 2022/02/13 08:40:56 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/02/13 09:36:52 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_args
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				eating_number;
+	int				starting_time;
 	pthread_mutex_t	print;
 }	t_args;
 
@@ -45,7 +46,9 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 int		ft_atoi(const char *str);
 
-
+int		creat_philo(t_philo *philo);
 int		args_init(int argc, char **argv, t_args *args);
 t_philo	*philo_init(t_args *args);
+size_t	get_time(void);
+
 #endif
