@@ -6,11 +6,11 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 11:25:06 by abarchil          #+#    #+#             */
-/*   Updated: 2022/02/13 00:10:27 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/02/13 08:41:26 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../philosophers.h"
 
 static int	error_handling(int ac)
 {
@@ -29,10 +29,12 @@ static int	error_handling(int ac)
 
 int	main(int ac, char **av)
 {
-	// t_philo	*philo;
+	t_philo	*philo;
 	t_args	args;
 	
-	if (error_handling(--ac) || philo_init(ac, av, &args))
+	philo = NULL;
+	if (error_handling(--ac) || args_init(ac, av, &args))
 		return (1);
+	philo = philo_init(&args);
 	return (0);
 }

@@ -6,13 +6,12 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 09:06:28 by abarchil          #+#    #+#             */
-/*   Updated: 2022/02/13 00:09:32 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/02/13 08:40:29 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../philosophers.h"
 
-// checke parameters
 //parsing
 //create threads
 //mutex
@@ -42,7 +41,7 @@ int     ft_isnumber(char *number)
 	return (1);
 }
 
-int	philo_init(int argc, char **argv, t_args *args)
+int	args_init(int argc, char **argv, t_args *args)
 {
 	args->eating_number = 1;
 	if (!ft_isnumber(argv[1]) || !ft_isnumber(argv[2]) || !ft_isnumber(argv[3]) || !ft_isnumber(argv[4]) || !ft_isnumber(argv[5]))
@@ -58,4 +57,26 @@ int	philo_init(int argc, char **argv, t_args *args)
 		|| args->eating_number <= 0)
 		return (printf("\e[1;91mError: Wrong Arguments\e[0m\n"), 1);
 	return (0);
+}
+
+t_philo	*philo_init(t_args *args)
+{
+	int		i;
+	t_philo *philo;
+
+	i = -1;
+	philo = (t_philo *)malloc(sizeof(t_philo) * args->philo_number); 
+	if (!philo)
+		return (ft_putstr_fd("Error : Allocation field\n", 2), exit(1), NULL);
+	while (++i < args->philo_number)
+	{
+		philo[i].philo_id = i + 1;
+		philo[i].args = args;
+		if (i == args->philo_number - 1)
+			philo[i].next_fork = philo[0].fork;
+		else
+			philo[i].next_fork = philo[i + 1].fork;
+	}
+	return(philo);
+		// printf("%d", philo[10].philo_id);
 }

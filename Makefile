@@ -6,12 +6,13 @@
 #    By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/11 11:39:14 by abarchil          #+#    #+#              #
-#    Updated: 2022/01/12 03:29:33 by abarchil         ###   ########.fr        #
+#    Updated: 2022/02/13 04:49:28 by abarchil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-SRC_FILE = main.c src/ft_putstr_fd.c src/ft_putchar_fd.c
+SRC_FILE = mandatory/main.c src/ft_putstr_fd.c src/ft_putchar_fd.c src/ft_isdigit.c src/ft_atoi.c \
+	mandatory/philo_init.c 
 
 OBJ_FILE = $(SRC_FILE:.c=.o)
 
@@ -31,7 +32,6 @@ CFLAGS = -Wall -Werror -Wextra
 
 all : $(NAME)
 
-%.o:%.c
 	@echo "$(RED) \
 		██████╗ ██╗  ██╗██╗██╗      █████╗  ██████╗ █████╗ ██████╗ ██╗  ██╗███████╗██████╗  ██████╗\n\
 		██╔══██╗██║  ██║██║██║     ██╔══██╗██╔════╝██╔══██╗██╔══██╗██║  ██║██╔════╝██╔══██╗██╔════╝\n\
@@ -40,6 +40,7 @@ all : $(NAME)
 		██║     ██║  ██║██║███████╗╚█████╔╝██████╔╝╚█████╔╝██║     ██║  ██║███████╗██║  ██║██████╔╝\n\
 		╚═╝     ╚═╝  ╚═╝╚═╝╚══════╝ ╚════╝ ╚═════╝  ╚════╝ ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝  $(RESET)"
 
+%.o:%.c
 	@echo "$(CYAN)                          <----------- COMPILING $< ----------->$(RESET)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
