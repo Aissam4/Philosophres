@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 11:31:33 by abarchil          #+#    #+#             */
-/*   Updated: 2022/02/13 09:36:52 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/02/14 20:51:41 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ typedef struct s_args
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				eating_number;
-	int				starting_time;
+	int				eat;
+	pthread_mutex_t	is_dead;
+	size_t			time;
 	pthread_mutex_t	print;
 }	t_args;
 
@@ -33,12 +35,14 @@ typedef struct s_philo
 {
 	int				philo_id;
 	pthread_t		thread_id;
-	unsigned int	should_die;
-	size_t			last_time_to_eat;
+	size_t			should_die;
+	int				eat_max;
 	t_args			*args;
 	pthread_mutex_t	fork;
-	pthread_mutex_t	next_fork;
+	pthread_mutex_t	*next_fork;
 }	t_philo;
+
+/***************** Srcs ***************************/
 
 int		ft_isdigit(int c);
 int     ft_isnumber(char *number);
@@ -46,9 +50,12 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 int		ft_atoi(const char *str);
 
-int		creat_philo(t_philo *philo);
+/******************* Mandatory_part ***********************/
+
+t_philo	*create_philo(t_args *args);
 int		args_init(int argc, char **argv, t_args *args);
 t_philo	*philo_init(t_args *args);
-size_t	get_time(void);
+size_t	get_current_time(void);
+void	routine(t_philo *philosopher, t_args *args);
 
 #endif

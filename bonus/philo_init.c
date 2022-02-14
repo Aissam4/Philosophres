@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 09:06:28 by abarchil          #+#    #+#             */
-/*   Updated: 2022/02/14 20:31:22 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/02/14 20:51:58 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,7 @@ void	*checke_if_dead(void *philo)
 		{
 			pthread_mutex_lock(&philosopher->args->print);
 			pthread_mutex_unlock(&philosopher->args->is_dead);
-			// philosopher->args->eat++;
-			// break ;
 		}
-		// printf("%d----%d\n", philosopher->args->eat, philosopher->args->eating_number);
-		// else if (philosopher->args->eat == philosopher->args->eating_number)
-		// {
-		// 	// pthread_mutex_lock(&philosopher->args->print);
-		// 	pthread_mutex_unlock(&philosopher->args->is_dead);
-		// }
 	}
 	return (NULL);
 }
