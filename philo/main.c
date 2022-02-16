@@ -6,11 +6,11 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 11:25:06 by abarchil          #+#    #+#             */
-/*   Updated: 2022/02/14 19:36:36 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/02/16 16:05:45 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philosophers.h"
+#include "philosophers.h"
 
 static int	error_handling(int ac)
 {
@@ -32,7 +32,7 @@ int	main(int ac, char **av)
 	t_philo	*philo;
 	t_args	args;
 	int		index;
-	
+
 	philo = NULL;
 	index = 0;
 	args.eat = 0;
@@ -49,6 +49,5 @@ int	main(int ac, char **av)
 		pthread_mutex_destroy(&philo[index++].fork);
 	pthread_mutex_destroy(&args.print);
 	free(philo);
-	
 	return (0);
 }

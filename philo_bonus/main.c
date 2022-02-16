@@ -6,11 +6,11 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 11:25:06 by abarchil          #+#    #+#             */
-/*   Updated: 2022/02/14 19:36:36 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/02/16 18:05:33 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philosophers.h"
+#include "philosophers.h"
 
 static int	error_handling(int ac)
 {
@@ -38,17 +38,10 @@ int	main(int ac, char **av)
 	args.eat = 0;
 	if (error_handling(--ac) || args_init(ac, av, &args))
 		return (1);
-	pthread_mutex_init(&args.is_dead, NULL);
-	pthread_mutex_init(&args.print, NULL);
-	pthread_mutex_lock(&args.is_dead);
+	puts("here");
 	philo = philo_init(&args);
 	if (!philo)
 		return (1);
-	pthread_mutex_lock(&args.is_dead);
-	while (index < args.philo_number)
-		pthread_mutex_destroy(&philo[index++].fork);
-	pthread_mutex_destroy(&args.print);
 	free(philo);
-	
 	return (0);
 }

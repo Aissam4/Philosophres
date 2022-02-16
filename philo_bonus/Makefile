@@ -6,19 +6,17 @@
 #    By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/11 11:39:14 by abarchil          #+#    #+#              #
-#    Updated: 2022/02/14 21:04:46 by abarchil         ###   ########.fr        #
+#    Updated: 2022/02/16 16:29:38 by abarchil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-SRC_FILE = mandatory/main.c src/ft_putstr_fd.c src/ft_putchar_fd.c src/ft_isdigit.c src/ft_atoi.c \
-	mandatory/philo_init.c 
+SRC_FILE = main.c ../src/ft_putstr_fd.c ../src/ft_putchar_fd.c ../src/ft_isdigit.c ../src/ft_atoi.c \
+	philo_init.c
 
 OBJ_FILE = $(SRC_FILE:.c=.o)
 
-NAME = philo
-
-BONUS = philo_bonus
+NAME = philo_bonus
 
 CC = gcc
 
@@ -54,9 +52,5 @@ clean :
 fclean : clean
 	@echo "$(YELLOW)                        <----------- REMOVING MINISHELL ----------->$(RESET)"
 	@rm -rf $(NAME) $(BONUS)
-bonus:	$(BONUS) philosophers.h
-$(BONUS) : $(OBJ_FILE)
-	@$(CC) $(CFLAGS) $(OBJ_FILE)  -lpthread -o $(BONUS)
 re : fclean all
-
 .PHONY : clean fclean re

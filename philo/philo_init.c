@@ -6,53 +6,15 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 09:06:28 by abarchil          #+#    #+#             */
-/*   Updated: 2022/02/14 20:51:58 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/02/16 16:05:42 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philosophers.h"
+#include "philosophers.h"
 
-void	mutex_print(int id, t_args *args, char *message)
+int	ft_isnumber(char *number)
 {
-	pthread_mutex_lock(&args->print);
-	printf("%lu | Philo Id: [%d] %s\n", get_current_time() - args->time, id, message);
-	pthread_mutex_unlock(&args->print);
-}
-
-void	*checke_if_dead(void *philo)
-{
-	t_philo	*philosopher;
-
-	philosopher = (t_philo *)philo;
-	while (1)
-	{
-		if (get_current_time() >= philosopher->should_die + 5)
-		{
-			mutex_print(philosopher->philo_id ,philosopher->args, "philosopher is dead");
-			pthread_mutex_lock(&philosopher->args->print);
-			pthread_mutex_unlock(&philosopher->args->is_dead);
-		}
-		else if (philosopher->eat_max == 1)
-		{
-			pthread_mutex_lock(&philosopher->args->print);
-			pthread_mutex_unlock(&philosopher->args->is_dead);
-		}
-	}
-	return (NULL);
-}
-
-
-size_t	get_current_time(void)
-{
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
-}
-
-int     ft_isnumber(char *number)
-{
-	int     i;
+	int	i;
 
 	i = 0;
 	if (!number)
@@ -60,14 +22,16 @@ int     ft_isnumber(char *number)
 	while (number[i])
 	{
 		if (!ft_isdigit(number[i]))
-				return (0);
+			return (0);
 		i++;
 	}
 	return (1);
 }
+
 int	args_init(int argc, char **argv, t_args *args)
 {
-	if (!ft_isnumber(argv[1]) || !ft_isnumber(argv[2]) || !ft_isnumber(argv[3]) || !ft_isnumber(argv[4]) || !ft_isnumber(argv[5]))
+	if (!ft_isnumber(argv[1]) || !ft_isnumber(argv[2]) || !ft_isnumber(argv[3])
+		|| !ft_isnumber(argv[4]) || !ft_isnumber(argv[5]))
 		return (ft_putstr_fd("\e[1;91mError: Invalid Arguments\e[0m\n", 2), 1);
 	args->philo_number = ft_atoi(argv[1]);
 	args->time_to_die = ft_atoi(argv[2]);
@@ -109,7 +73,8 @@ void	*philosophers(void *philo)
 	i = 0;
 	philosopher = (t_philo *)philo;
 	philosopher->eat_max = 0;
-	philosopher->should_die = philosopher->args->time + philosopher->args->time_to_die;
+	philosopher->should_die = philosopher->args->time
+		+ philosopher->args->time_to_die;
 	pthread_create(&thread_id, NULL, &checke_if_dead, philosopher);
 	pthread_detach(thread_id);
 	while (i < philosopher->args->eating_number
@@ -120,7 +85,8 @@ void	*philosophers(void *philo)
 		if (i == philosopher->args->eating_number)
 		{
 			philosopher->args->eat += 1;
-			mutex_print(philosopher->philo_id, philosopher->args, "is thinking...");
+			mutex_print(philosopher->philo_id,
+				philosopher->args, "is thinking...");
 		}
 	}
 	philosopher->eat_max = 1;
@@ -135,18 +101,12 @@ t_philo	*philo_init(t_args *args)
 	i = 0;
 	philo = malloc(sizeof(t_philo) * args ->philo_number);
 	if (!philo)
-		return (printf("Error: Allocation field"), NULL);
+		return (printf("Error: Allocation failed"), NULL);
 	args->time = get_current_time();
 	args->eat = 0;
 	while (i < args->philo_number)
 	{
-		pthread_mutex_init(&philo[i].fork, NULL);
-		philo[i].philo_id = i + 1;
-		philo[i].args = args;
-		if (i == args->philo_number - 1)
-			philo[i].next_fork = &philo[0].fork;
-		else
-			philo[i].next_fork = &philo[i + 1].fork;
+		philo_init_utils(args, philo, i);
 		if (pthread_create(&philo[i].thread_id, NULL, &philosophers, &philo[i]))
 			return (free(philo), printf("Error occured thread creation"), NULL);
 		usleep(10);

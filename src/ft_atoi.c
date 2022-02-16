@@ -6,11 +6,12 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 19:17:45 by abarchil          #+#    #+#             */
-/*   Updated: 2022/02/13 02:32:18 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/02/16 16:07:55 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philosophers.h"
+#include "../philo/philosophers.h"
+#include "../philo_bonus/philosophers.h"
 
 int	ft_atoi(const char *str)
 {

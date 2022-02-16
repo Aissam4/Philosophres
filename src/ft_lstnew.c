@@ -6,11 +6,12 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/29 13:17:29 by abarchil          #+#    #+#             */
-/*   Updated: 2022/02/14 09:19:04 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/02/16 16:08:03 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philosophers.h"
+#include "../philo/philosophers.h"
+#include "../philo_bonus/philosophers.h"
 
 t_philo	*ft_lstnew(int	philo_id2)
 {

@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 11:31:33 by abarchil          #+#    #+#             */
-/*   Updated: 2022/02/14 20:51:41 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/02/16 17:34:15 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,17 @@
 # include <pthread.h>
 # include <stdlib.h>
 # include <sys/time.h>
-
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+# include <signal.h>
+# include <semaphore.h>
+typedef struct s_sem
+{
+	sem_t			*print;
+	sem_t			*is_dead;
+	sem_t			*fork;
+}t_sem;
 typedef struct s_args
 {
 	int				philo_number;
@@ -26,9 +36,8 @@ typedef struct s_args
 	int				time_to_sleep;
 	int				eating_number;
 	int				eat;
-	pthread_mutex_t	is_dead;
+	t_sem			*sem;
 	size_t			time;
-	pthread_mutex_t	print;
 }	t_args;
 
 typedef struct s_philo
@@ -37,9 +46,8 @@ typedef struct s_philo
 	pthread_t		thread_id;
 	size_t			should_die;
 	int				eat_max;
+	t_sem			*sem;
 	t_args			*args;
-	pthread_mutex_t	fork;
-	pthread_mutex_t	*next_fork;
 }	t_philo;
 
 /***************** Srcs ***************************/
@@ -53,9 +61,15 @@ int		ft_atoi(const char *str);
 /******************* Mandatory_part ***********************/
 
 t_philo	*create_philo(t_args *args);
-int		args_init(int argc, char **argv, t_args *args);
+void	mutex_print(int id, t_args *args, char *message);
+void	*checke_if_dead(void *philo);
 t_philo	*philo_init(t_args *args);
 size_t	get_current_time(void);
 void	routine(t_philo *philosopher, t_args *args);
+int     ft_isnumber(char *number);
+int		args_init(int argc, char **argv, t_args *args);
+void	routine(t_philo *philo, t_args *args);
+void	*philosophers(void *philo);
+void	philo_init_utils(t_args *args, t_philo *philo, int i);
 
 #endif
