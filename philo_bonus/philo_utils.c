@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 08:46:44 by abarchil          #+#    #+#             */
-/*   Updated: 2022/02/17 10:17:16 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/02/17 10:34:22 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,12 @@ void	child_process(int id, t_args args, t_sems *sems)
 
 void	close_program(int processes[200], t_args *args, t_sems *sems)
 {
-	int	status;
-	int	j;
+	int	index;
 
-	waitpid(-1, &status, 0);
-	if (WEXITSTATUS(status) == 1)
-	{
-		j = -1;
-		while (++j < args->philo_number)
-			kill(processes[j], SIGTERM);
-	}
+	wait(NULL);
+	index = -1;
+	while (++index < args->philo_number)
+		kill(processes[index], SIGTERM);
 	sem_close(sems->fork_sem);
 	sem_close(sems->print_sem);
 }
