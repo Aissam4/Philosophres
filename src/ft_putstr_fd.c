@@ -6,12 +6,11 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 23:16:50 by abarchil          #+#    #+#             */
-/*   Updated: 2022/02/16 16:07:51 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/02/17 08:28:51 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo/philosophers.h"
-#include "../philo_bonus/philosophers.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {

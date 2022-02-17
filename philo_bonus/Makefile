@@ -6,13 +6,11 @@
 #    By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/11 11:39:14 by abarchil          #+#    #+#              #
-#    Updated: 2022/02/16 16:29:38 by abarchil         ###   ########.fr        #
+#    Updated: 2022/02/17 09:08:19 by abarchil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-
-SRC_FILE = main.c ../src/ft_putstr_fd.c ../src/ft_putchar_fd.c ../src/ft_isdigit.c ../src/ft_atoi.c \
-	philo_init.c
+SRC_FILE = main.c  ft_atoi.c philo_init.c philo_utils.c
 
 OBJ_FILE = $(SRC_FILE:.c=.o)
 
@@ -30,7 +28,7 @@ YELLOW = \033[0;33m
 
 CFLAGS = -Wall -Werror -Wextra
 
-all : $(NAME) philosophers.h
+all : $(NAME) philo_bonus.h
 
 	@echo "$(RED) \
 		██████╗ ██╗  ██╗██╗██╗      █████╗  ██████╗ █████╗ ██████╗ ██╗  ██╗███████╗██████╗  ██████╗\n\

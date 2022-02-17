@@ -5,34 +5,46 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 19:17:45 by abarchil          #+#    #+#             */
-/*   Updated: 2022/02/17 08:34:40 by abarchil         ###   ########.fr       */
+/*   Created: 2022/02/17 08:46:29 by abarchil          #+#    #+#             */
+/*   Updated: 2022/02/17 10:09:33 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo/philosophers.h"
+#include "philo_bonus.h"
 
-int	ft_atoi(const char *str)
+static int	ft_issign(char c)
+{
+	if (c == '-' || c == '+')
+		return (1);
+	return (0);
+}
+
+static int	ft_isspace(int c)
+{
+	c = (unsigned char)c;
+	if (c == '\t' || c == '\n' || c == '\v' \
+	|| c == '\f' || c == '\r' || c == ' ')
+		return (1);
+	return (0);
+}
+
+int	ft_atoi(char *str)
 {
 	int	i;
-	int	signe;
-	int	result;
+	int	num;
+	int	sign;
 
 	i = 0;
-	result = 0;
-	signe = 1;
-	while (str[i] == '\f' || str[i] == '\n' || str[i] == '\t'
-		|| str[i] == '\r' || str[i] == '\v' || str[i] == ' ')
+	num = 0;
+	sign = 1;
+	while (*(str + i) && ft_isspace(*(str + i)))
 		i++;
-	if (str[i] == '-' || str[i] == '+')
-		if (str[i++] == '-')
-			signe = -1;
-	if (!(str[i] >= '0' && str[i] <= '9'))
-		return (0);
-	while (str[i] >= '0' && str[i] <= '9')
+	if (*(str + i) && ft_issign(*(str + i)))
+		sign *= '+' - *(str + i++) + 1;
+	while (*(str + i) && ft_isdigit(*(str + i)))
 	{
-		result = result * 10 + str[i] - '0';
+		num = num * 10 + *(str + i) - 48;
 		i++;
 	}
-	return (result * signe);
+	return (num * sign);
 }
