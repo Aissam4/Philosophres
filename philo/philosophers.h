@@ -6,12 +6,12 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 11:31:33 by abarchil          #+#    #+#             */
-/*   Updated: 2022/02/16 15:46:08 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/02/17 10:18:36 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
-#define PHILOSOPHERS_H
+# define PHILOSOPHERS_H
 # include <stdio.h>
 # include <unistd.h>
 # include <pthread.h>
@@ -45,7 +45,7 @@ typedef struct s_philo
 /***************** Srcs ***************************/
 
 int		ft_isdigit(int c);
-int     ft_isnumber(char *number);
+int		ft_isnumber(char *number);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 int		ft_atoi(const char *str);
@@ -58,7 +58,7 @@ void	*checke_if_dead(void *philo);
 t_philo	*philo_init(t_args *args);
 size_t	get_current_time(void);
 void	routine(t_philo *philosopher, t_args *args);
-int     ft_isnumber(char *number);
+int		ft_isnumber(char *number);
 int		args_init(int argc, char **argv, t_args *args);
 void	routine(t_philo *philo, t_args *args);
 void	*philosophers(void *philo);
